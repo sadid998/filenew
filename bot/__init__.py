@@ -60,7 +60,7 @@ async def download(event):
             id_hex = hex(msg.id)[2:]
             id = f"{id_hex}/{get_file_name(msg)}"
             bot_url = f"t.me/{username_bot}?start={id_hex}"
-            await event.reply(f"Link to download file: \n\n📎 : linkk {Config.DOMAIN}/{id}\n\n🤖 : {bot_url}")
+            await event.reply(f"Link to download file: \n\n📎 : {linkk} {Config.DOMAIN}/{id}\n\n🤖 : {bot_url}")
             return
 
         elif id_msg := re.search("/start (.*)", event.raw_text ):
