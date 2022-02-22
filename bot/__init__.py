@@ -8,6 +8,10 @@ import requests
 import re
 from urllib.parse import quote
 
+import json
+import requests
+response = requests.get("https://droplink.co/api?api=0b8645cc45284e92d722e59c60d918291526a16c&url=yourdestinationlink.com").text
+print(json.loads(response)["shortenedUrl"])
 def cronjob():
     threading.Timer(60*5, cronjob).start()
     requests.get(Config.DOMAIN)
