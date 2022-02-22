@@ -55,8 +55,9 @@ async def download(event):
                 caption=f"@{sender.username}|[{event.chat_id}](tg://user?id={event.sender_id})/{event.message.id}")
             id_hex = hex(msg.id)[2:]
             id = f"{id_hex}/{get_file_name(msg)}"
+response = requests.get("https://droplink.co/api?api=0b8645cc45284e92d722e59c60d918291526a16c&url={Config.DOMAIN}/{id}").json()["shortenedUrl"]
             bot_url = f"t.me/{username_bot}?start={id_hex}"
-            await event.reply(f"Link to download file: \n\n📎 : {Config.DOMAIN}/{id}\n\n🤖 : {bot_url}")
+            await event.reply(f"Link to download file: \n\nðŸ“Ž : {response}\n\nðŸ¤– : {bot_url}")
             return
 
         elif id_msg := re.search("/start (.*)", event.raw_text ):
@@ -77,12 +78,13 @@ async def download(event):
                         forward = await file.forward_to(event.chat_id)
                         id_name = f"{id_hex}/{get_file_name(msg)}"
                         bot_url = f"t.me/{username_bot}?start={id_hex}"
-                        forward_reply = await forward.reply(f"will be deleted in 21 seconds. \n\n📎 : {Config.DOMAIN}/{id_name}\n\n🤖 : {bot_url}",link_preview=False)
+                        responseos = requests.get("https://droplink.co/api?api=0b8645cc45284e92d722e59c60d918291526a16c&url={Config.DOMAIN}/{id_name}/{id}").json()["shortenedUrl"]
+                        forward_reply = await forward.reply(f"will be deleted in 21 seconds. \n\nðŸ“Ž : {responseos}\n\nðŸ¤– : {bot_url}",link_preview=False)
                         await asyncio.sleep(12)
-                        await forward_reply.edit(f"will be deleted in 10 seconds. \n\n📎 : {Config.DOMAIN}/{id_name}\n\n🤖 : {bot_url}")
+                        await forward_reply.edit(f"will be deleted in 10 seconds. \n\nðŸ“Ž : {responseos}\n\nðŸ¤– : {bot_url}")
                         await asyncio.sleep(10)
                         await forward.delete()
-                        await forward_reply.edit(f"📎 : {Config.DOMAIN}/{id_name}\n\n🤖 : {bot_url}",link_preview=True)
+                        await forward_reply.edit(f"ðŸ“Ž : {responseos}\n\nðŸ¤– : {bot_url}",link_preview=False)
                 return
         
         if pv:
