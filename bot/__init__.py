@@ -55,8 +55,8 @@ async def download(event):
                 caption=f"@{sender.username}|[{event.chat_id}](tg://user?id={event.sender_id})/{event.message.id}")
             id_hex = hex(msg.id)[2:]
             id = f"{id_hex}/{get_file_name(msg)}"
-response = requests.get("https://droplink.co/api?api=0b8645cc45284e92d722e59c60d918291526a16c&url={Config.DOMAIN}/{id}").json()["shortenedUrl"]
             bot_url = f"t.me/{username_bot}?start={id_hex}"
+response = requests.get("https://droplink.co/api?api=0b8645cc45284e92d722e59c60d918291526a16c&url={Config.DOMAIN}/{id}").json()["shortenedUrl"]
             await event.reply(f"Link to download file: \n\nðŸ“Ž : {response}\n\nðŸ¤– : {bot_url}")
             return
 
