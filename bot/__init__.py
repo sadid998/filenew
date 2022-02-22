@@ -82,14 +82,12 @@ async def download(event):
                         forward = await file.forward_to(event.chat_id)
                         id_name = f"{id_hex}/{get_file_name(msg)}"
                         bot_url = f"t.me/{username_bot}?start={id_hex}"
-            responseo = requests.get(f"https://droplink.co/api?api=0b8645cc45284e92d722e59c60d918291526a16c&url={Config.DOMAIN}/{id_name}").text
-            linkks = (json.loads(responseo)["shortenedUrl"])
-                        forward_reply = await forward.reply(f"will be deleted in 21 seconds. \n\n📎 : {linkks}\n\n🤖 : {bot_url}",link_preview=False)
+                        forward_reply = await forward.reply(f"will be deleted in 21 seconds. \n\n📎 : {linkk}\n\n🤖 : {bot_url}",link_preview=False)
                         await asyncio.sleep(12)
-                        await forward_reply.edit(f"will be deleted in 10 seconds. \n\n📎 : {linkks}\n\n🤖 : {bot_url}")
+                        await forward_reply.edit(f"will be deleted in 10 seconds. \n\n📎 : {linkk}\n\n🤖 : {bot_url}")
                         await asyncio.sleep(10)
                         await forward.delete()
-                        await forward_reply.edit(f"📎 : {linkks}\n\n🤖 : {bot_url}",link_preview=True)
+                        await forward_reply.edit(f"📎 : {linkk}\n\n🤖 : {bot_url}",link_preview=True)
                 return
         
         if pv:
