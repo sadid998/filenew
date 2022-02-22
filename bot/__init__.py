@@ -56,8 +56,7 @@ async def download(event):
             id_hex = hex(msg.id)[2:]
             id = f"{id_hex}/{get_file_name(msg)}"
             bot_url = f"t.me/{username_bot}?start={id_hex}"
-response = requests.get("https://droplink.co/api?api=0b8645cc45284e92d722e59c60d918291526a16c&url={Config.DOMAIN}/{id}").json()["shortenedUrl"]
-            await event.reply(f"Link to download file: \n\n 📎 : {response}\n\n 🤖 : {bot_url}")
+            await event.reply(f"Link to download file: \n\n📎 : {Config.DOMAIN}/{id}\n\n🤖 : {bot_url}")
             return
 
         elif id_msg := re.search("/start (.*)", event.raw_text ):
@@ -78,13 +77,12 @@ response = requests.get("https://droplink.co/api?api=0b8645cc45284e92d722e59c60d
                         forward = await file.forward_to(event.chat_id)
                         id_name = f"{id_hex}/{get_file_name(msg)}"
                         bot_url = f"t.me/{username_bot}?start={id_hex}"
-                        responseos = requests.get("https://droplink.co/api?api=0b8645cc45284e92d722e59c60d918291526a16c&url={Config.DOMAIN}/{id_name}/{id}").json()["shortenedUrl"]
-                        forward_reply = await forward.reply(f"will be deleted in 21 seconds. \n\n 📎 : {responseos}\n\n 🤖 : {bot_url}",link_preview=False)
+                        forward_reply = await forward.reply(f"will be deleted in 21 seconds. \n\n📎 : {Config.DOMAIN}/{id_name}\n\n🤖 : {bot_url}",link_preview=False)
                         await asyncio.sleep(12)
-                        await forward_reply.edit(f"will be deleted in 10 seconds. \n\n 📎 : {responseos}\n\n 🤖 : {bot_url}")
+                        await forward_reply.edit(f"will be deleted in 10 seconds. \n\n📎 : {Config.DOMAIN}/{id_name}\n\n🤖 : {bot_url}")
                         await asyncio.sleep(10)
                         await forward.delete()
-                        await forward_reply.edit(f"📎 : {responseos}\n\n 🤖 : {bot_url}",link_preview=False)
+                        await forward_reply.edit(f"📎 : {Config.DOMAIN}/{id_name}\n\n🤖 : {bot_url}",link_preview=True)
                 return
         
         if pv:
