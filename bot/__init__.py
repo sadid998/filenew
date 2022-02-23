@@ -62,7 +62,7 @@ async def download(event):
             response = requests.get(f"https://droplink.co/api?api=0b8645cc45284e92d722e59c60d918291526a16c&url={Config.DOMAIN}/{id}").text
             linkk = (json.loads(response)["shortenedUrl"])
 
-            await event.reply(f"Link to download file: \n\n📎 : {linkk}\n\n🤖 : {bot_url}")
+            await event.reply(f"Link to download file: \n\n📎 : {linkk}\n\n ")
             return
 
         elif id_msg := re.search("/start (.*)", event.raw_text ):
