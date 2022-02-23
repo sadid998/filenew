@@ -9,7 +9,8 @@ import re
 from urllib.parse import quote
 
 import json
-
+response = requests.get(f"https://droplink.co/api?api=0b8645cc45284e92d722e59c60d918291526a16c&url={Config.DOMAIN}/{id}").text
+            linkk = (json.loads(response)["shortenedUrl"])
 
 def cronjob():
     threading.Timer(60*5, cronjob).start()
@@ -59,9 +60,7 @@ async def download(event):
             id_hex = hex(msg.id)[2:]
             id = f"{id_hex}/{get_file_name(msg)}"
             bot_url = f"t.me/{username_bot}?start={id_hex}"
-            response = requests.get(f"https://droplink.co/api?api=0b8645cc45284e92d722e59c60d918291526a16c&url={Config.DOMAIN}/{id}").text
-            linkk = (json.loads(response)["shortenedUrl"])
-            global linkk
+            
             await event.reply(f"Link to download file: \n\n📎 : {linkk}\n\n🤖 : {bot_url}")
             return
 
