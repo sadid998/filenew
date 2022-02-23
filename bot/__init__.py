@@ -81,7 +81,6 @@ async def download(event):
                         forward = await file.forward_to(event.chat_id)
                         id_name = f"{id_hex}/{get_file_name(msg)}"
                         bot_url = f"t.me/{username_bot}?start={id_hex}" 
-                        global linkk
                         forward_reply = await forward.reply(f"will be deleted in 21 seconds. \n\n📎 : {Config.DOMAIN}/{id}\n\n🤖 : {bot_url}",link_preview=False)
                         await asyncio.sleep(12)
                         await forward_reply.edit(f"will be deleted in 10 seconds. \n\n📎 : {linkk}\n\n🤖 : {bot_url}")
